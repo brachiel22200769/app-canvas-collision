@@ -11,7 +11,7 @@ document.body.innerHTML = "<h1 style='font-size: 32px; font-weight: bold; color:
 theCanvas = document.getElementById("canvas");
 let ctx = theCanvas.getContext("2d");
 
-theCanvas.style.border = "8px solidrgb(197, 97, 255)";
+theCanvas.style.border = "8px solid rgb(197, 97, 255)";
 theCanvas.style.borderRadius = "30px";
 theCanvas.style.boxShadow = "0 0 25px rgba(133, 12, 149, 0.8)";
 theCanvas.style.margin = "20px";
@@ -120,23 +120,45 @@ const controls = document.createElement("div");
 controls.style.display = "flex";
 controls.style.alignItems = "center";
 controls.style.marginTop = "15px";
+controls.style.gap = "10px";
 
 document.body.appendChild(controls);
 
+const input = document.createElement("input");
+input.type = "number";
+input.min = "1";
+input.value = numCircles;
+input.style.padding = "10px";
+input.style.fontSize = "18px";
+input.style.border = "2px solid #FF6F61";
+input.style.borderRadius = "10px";
+input.style.textAlign = "center";
+controls.appendChild(input);
+
+const generateButton = document.createElement("button");
+generateButton.innerHTML = "Generar Círculos";
+generateButton.style.padding = "10px 20px";
+generateButton.style.fontSize = "18px";
+generateButton.style.cursor = "pointer";
+generateButton.style.border = "2px solid #FF6F61";
+generateButton.style.borderRadius = "10px";
+generateButton.style.background = "#FF6F61";
+generateButton.style.color = "white";
+generateButton.onclick = () => {
+    numCircles = parseInt(input.value) || 10;
+    generateCircles();
+};
+controls.appendChild(generateButton);
+
 const button = document.createElement("button");
 button.innerHTML = "Pausa";
-button.style.padding = "15px 25px";
-button.style.fontSize = "20px";
-button.style.fontWeight = "bold";
+button.style.padding = "10px 20px";
+button.style.fontSize = "18px";
 button.style.cursor = "pointer";
-button.style.border = "3px solid #FF6F61";
-button.style.borderRadius = "15px";
+button.style.border = "2px solid #FF6F61";
+button.style.borderRadius = "10px";
 button.style.background = "#FF6F61";
 button.style.color = "white";
-button.style.boxShadow = "3px 3px 10px rgba(0,0,0,0.3)";
-button.style.transition = "0.3s";
-button.onmouseover = () => button.style.background = "#FC5130";
-button.onmouseleave = () => button.style.background = "#FF6F61";
 button.onclick = () => {
     animationRunning = !animationRunning;
     button.innerHTML = animationRunning ? "Pausa" : "Reanudar";
@@ -144,5 +166,4 @@ button.onclick = () => {
         updateCircles();
     }
 };
-
 controls.appendChild(button);
